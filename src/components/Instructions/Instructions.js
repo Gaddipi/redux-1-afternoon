@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import store, { UPDATE_INSTRUCTIONS, UPDATE_RECIPE } from "./../../store";
 import { Link } from "react-router-dom";
-import store, { ADD_INSTRUCTION, ADD_RECIPE } from "../../store";
 
 class Instructions extends Component {
   constructor(props) {
@@ -14,9 +14,7 @@ class Instructions extends Component {
   componentDidMount() {
     store.subscribe(() => {
       const reduxState = store.getState();
-      this.setState({
-        instructions: reduxState.instructions
-      });
+      this.setState({ instructions: reduxState.instructions });
     });
   }
   handleChange(val) {
@@ -26,7 +24,7 @@ class Instructions extends Component {
   }
   addInstruction() {
     store.dispatch({
-      type: ADD_INSTRUCTION,
+      type: UPDATE_INSTRUCTIONS,
       payload: this.state.input
     });
     this.setState({
@@ -34,9 +32,8 @@ class Instructions extends Component {
     });
   }
   create() {
-    // Create new recipe in Redux state
     store.dispatch({
-      type: ADD_RECIPE
+      type: UPDATE_RECIPE
     });
   }
   render() {
